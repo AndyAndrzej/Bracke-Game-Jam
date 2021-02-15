@@ -6,6 +6,7 @@ public class BoneMapping : MonoBehaviour
 {
 
     [SerializeField] private float _spring = 100, _damper = 0.2f, _rbAngularDrag = 10,_rbDrag=0;
+    [SerializeField] private PhysicMaterial _material;
     [Tooltip("SizeOfColither")]
     [SerializeField]
     private float _size = 5;
@@ -22,7 +23,7 @@ public class BoneMapping : MonoBehaviour
     private GameObject _root;
     private GameObject[] _bones;
     [HideInInspector]public Rigidbody _rootRB;
-    private Rigidbody[] _bonesRB;
+    [HideInInspector]public Rigidbody[] _bonesRB;
     private SphereCollider[] _bonesCol;
     private SpringJoint[] _bonesSpring;
     private JointLimits _limits;
@@ -49,7 +50,9 @@ public class BoneMapping : MonoBehaviour
                 _bonesCol[i]=_bones[i].AddComponent<SphereCollider>();
                 _bonesCol[i].radius = _size;
                 _bonesCol[i].center = _bones[i].transform.InverseTransformPoint(_root.transform.position) * _colCenterPosBetRootAndBone;
-                _bonesRB[i].mass = _mass;
+            _bonesCol[i].material = _material;
+
+                _bonesRB[i].mass = i< _root.transform.childCount/2 ? _mass*2:_mass;
                 _bonesRB[i].angularDrag = _rbAngularDrag;
                 _bonesRB[i].drag = _rbDrag;
      }
