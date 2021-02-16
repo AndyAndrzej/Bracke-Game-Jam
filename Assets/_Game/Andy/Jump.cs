@@ -9,15 +9,11 @@ public class Jump : MonoBehaviour
     private Rigidbody _rootRB;
     private Rigidbody[] _bonesRB;
     [SerializeField] private float _force = 15;
-    private SpringJoint _fixedjoit;
-    [SerializeField] private float _breakingForce = 25, _tolerance = 0.1f, _maxDistance = 2,_spring=250;
+
     void Start()
     {
         _rootRB = this.GetComponentInParent<BoneMapping>()._rootRB;
         _bonesRB= this.GetComponentInParent<BoneMapping>()._bonesRB;
-        
-        
-
     }
 
     // Update is called once per frame
@@ -44,21 +40,9 @@ public class Jump : MonoBehaviour
 
 
         }
+        
     }
-    private Rigidbody _temp;
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.TryGetComponent(out _temp) && !other.gameObject.name.Contains("bone"))
-        {
-            _fixedjoit = _rootRB.gameObject.AddComponent<SpringJoint>();
-            _fixedjoit.breakForce = _breakingForce;
-            _fixedjoit.connectedBody = _temp;
-            _fixedjoit.spring = _spring;
-
-            Debug.Log(_fixedjoit);
 
 
-        }
-    }
 
 }
