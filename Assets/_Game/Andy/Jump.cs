@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,57 +9,48 @@ public class Jump : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody _rootRB;
     private Rigidbody[] _bonesRB;
-    [SerializeField] private float _force = 15;
-    private SpringJoint _fixedjoit;
-    [SerializeField] private float _breakingForce = 25, _tolerance = 0.1f, _maxDistance = 2,_spring=250;
+    [Header("Siła skoku")]
+    [SerializeField] private float _force = 5,_directionalForce=25;
+    [Header("Czas po którym osiąga maks moc skoku")]
+    [SerializeField][Range(0,5)] private float _jumpForceGrowthTime = 1;
+    [SerializeField] private GameObject _environment;
+
     void Start()
     {
         _rootRB = this.GetComponentInParent<BoneMapping>()._rootRB;
         _bonesRB= this.GetComponentInParent<BoneMapping>()._bonesRB;
-        
-        
-
     }
-
+    private float _moveDirection;
     // Update is called once per frame
-    private Vector3 _direction;
+    private float _jumpStrenght = 0,_timePressed;
+    [SerializeField] private float _anTime = 0.1f;
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _direction = Vector3.up;
-            if(Input.GetKey(KeyCode.A))
-            {
-                _direction += Vector3.left;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                _direction += Vector3.right;
-            }
-            _rootRB.AddForce(_direction * _force, ForceMode.Impulse);
+            _timePressed = Time.time;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            JumpNow();
+        }
+        _moveDirection = Input.GetAxis("Horizontal");
+    }
+    private void JumpNow()
+    {
+            _jumpStrenght = Mathf.InverseLerp(0.1f, _jumpForceGrowthTime, Time.time - _timePressed);
+
             for (int i = 0; i < _bonesRB.Length; i++)
             {
-                _bonesRB[i].AddForce(_direction * _force, ForceMode.Impulse);
+                _bonesRB[i].AddForce((Vector3.right*_moveDirection)* _directionalForce * _jumpStrenght, ForceMode.Impulse);
+
             }
-
-
-        }
-    }
-    private Rigidbody _temp;
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.TryGetComponent(out _temp) && !other.gameObject.name.Contains("bone"))
-        {
-            _fixedjoit = _rootRB.gameObject.AddComponent<SpringJoint>();
-            _fixedjoit.breakForce = _breakingForce;
-            _fixedjoit.connectedBody = _temp;
-            _fixedjoit.spring = _spring;
-
-            Debug.Log(_fixedjoit);
-
-
-        }
+        float y= _environment.transform.position.y;
+        _environment.transform.DOMoveY(_environment.transform.position.y + _force * _anTime * _jumpStrenght, _anTime).OnComplete(() => {
+            _environment.transform.DOMoveY(y, _anTime);
+        });
+            _jumpStrenght = 0;
+            _timePressed = 0;
     }
 
 }
