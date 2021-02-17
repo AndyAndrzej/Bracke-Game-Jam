@@ -6,11 +6,27 @@ using UnityEngine;
 
 public class SlimeSizeControl : MonoBehaviour
 {
-    [SerializeField] private float _startScale;
+    private float _startZPos;
     [SerializeField] private float _scaleGrowth;
     [SerializeField] private float _anTime = 2;
-    public void ChangeSize()
+    private Vector3 _pos;
+    private void Awake()
     {
-        this.transform.parent.DOScale(_startScale + _scaleGrowth * GameManager.Instance.SizePoints, _anTime);
+        _startZPos = this.transform.parent.position.z;
+        
+    }
+    private void OnEnable()
+    {
+        GameManager.OnResize += ChangeSize;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnResize -= ChangeSize;
+    }
+    public void ChangeSize(int value)
+    {
+        
+        this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
+
     }
 }
