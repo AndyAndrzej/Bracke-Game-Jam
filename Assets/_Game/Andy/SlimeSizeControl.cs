@@ -13,11 +13,20 @@ public class SlimeSizeControl : MonoBehaviour
     private void Awake()
     {
         _startZPos = this.transform.parent.position.z;
+        
     }
-    public void ChangeSize()
+    private void OnEnable()
+    {
+        GameManager.OnResize += ChangeSize;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnResize -= ChangeSize;
+    }
+    public void ChangeSize(int value)
     {
         
-        this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * GameManager.Instance.SizePoints, _anTime);
+        this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
 
     }
 }
