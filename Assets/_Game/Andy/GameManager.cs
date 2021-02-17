@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     {
         _player = source;
     }
+    public GameObject GivePlayer()
+    {
+        return _player;
+    }
     public void AddOneSizePoint()
     {
         _sizePoints++;

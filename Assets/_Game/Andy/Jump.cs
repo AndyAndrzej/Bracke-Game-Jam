@@ -36,6 +36,7 @@ public class Jump : MonoBehaviour
         }
         _moveDirection = Input.GetAxis("Horizontal");
     }
+    private Vector3 _jumpHeight;
     private void JumpNow()
     {
             _jumpStrenght = Mathf.InverseLerp(0.1f, _jumpForceGrowthTime, Time.time - _timePressed);
@@ -46,10 +47,12 @@ public class Jump : MonoBehaviour
 
             }
         Vector3 y= _environment.transform.position;
-        _environment.transform.DOMove(_environment.transform.position + (Vector3.up * _force) * _anTime * _jumpStrenght, _anTime)
+        _jumpHeight = (Vector3.up * _force) * _anTime * _jumpStrenght;
+        _environment.transform.DOMove(_environment.transform.position + _jumpHeight, _anTime)
             .OnComplete(() => {
             _environment.transform.DOMove(y, _anTime);
         });
+        
         /*_environment.transform.DOPunchPosition(, _anTime,4);*/
             _jumpStrenght = 0;
             _timePressed = 0;
