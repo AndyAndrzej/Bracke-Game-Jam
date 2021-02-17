@@ -40,15 +40,17 @@ public class Jump : MonoBehaviour
     {
             _jumpStrenght = Mathf.InverseLerp(0.1f, _jumpForceGrowthTime, Time.time - _timePressed);
 
-            for (int i = 0; i < _bonesRB.Length; i++)
+           for (int i = 0; i < _bonesRB.Length; i++)
             {
                 _bonesRB[i].AddForce((Vector3.right*_moveDirection)* _directionalForce * _jumpStrenght, ForceMode.Impulse);
 
             }
-        float y= _environment.transform.position.y;
-        _environment.transform.DOMoveY(_environment.transform.position.y + _force * _anTime * _jumpStrenght, _anTime).OnComplete(() => {
-            _environment.transform.DOMoveY(y, _anTime);
+        Vector3 y= _environment.transform.position;
+        _environment.transform.DOMove(_environment.transform.position + (Vector3.up * _force) * _anTime * _jumpStrenght, _anTime)
+            .OnComplete(() => {
+            _environment.transform.DOMove(y, _anTime);
         });
+        /*_environment.transform.DOPunchPosition(, _anTime,4);*/
             _jumpStrenght = 0;
             _timePressed = 0;
     }

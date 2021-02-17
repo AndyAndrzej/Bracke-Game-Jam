@@ -83,6 +83,35 @@ public class BoneMapping : MonoBehaviour
             }
         }
     }
+    public void ResetJoints()
+    {
+        int j = _root.transform.childCount;
+        for (int k = -_bonesConnections / 2; k < _bonesConnections / 2 + 1; k++)
+        {
+            if (k != 0)
+            {
+                for (int i = 0; i < _root.transform.childCount; i++)
+                {
+
+                    _bonesSpring[j].connectedBody = _bonesRB[CircleValue(i + k, _root.transform.childCount)];
+                    _bonesSpring[j].damper = _damper;
+                    _bonesSpring[j].spring = _spring;
+
+                    j++;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _root.transform.childCount; i++)
+                {
+
+                    _bonesSpring[i].connectedBody = _rootRB;
+                    _bonesSpring[i].damper = _damper;
+                    _bonesSpring[i].spring = _spring;
+                }
+            }
+        }
+    }
     private int CircleValue(int value,int max)
     {
         if(value>=max)
