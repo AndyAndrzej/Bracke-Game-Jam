@@ -25,14 +25,17 @@ public class SlimeSizeControl : MonoBehaviour
     {
         GameManager.OnResize -= ChangeSize;
     }
-    public void ChangeSize(int value)
+    public void ChangeSize(int value,int OldValue)
     {
         _boneControl.ClearJonts();
         //this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
-        this.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime);
-        _boneControl.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime).OnComplete(()=> {
-            _boneControl.SetJoints();
+        this.transform.DOMoveY(this.transform.position.y + _scaleGrowth * value, _anTime).OnStart(()=> {
+            this.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime);
+            _boneControl.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime).OnComplete(() => {
+                _boneControl.SetJoints();
+            });
         });
+        
 
     }
 }

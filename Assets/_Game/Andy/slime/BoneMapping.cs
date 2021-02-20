@@ -110,6 +110,16 @@ public class BoneMapping : MonoBehaviour
             Destroy(_bonesSpring[i]);
         }
     }
+    [SerializeField] private float _strenghtOfSlowInCutscene=250;
+    public void SlowDown(bool active)
+    {
+
+        for (int i = 0; i < _root.transform.childCount; i++)
+        {
+            _bonesRB[i].drag *= active? _strenghtOfSlowInCutscene : (float)1/ _strenghtOfSlowInCutscene;
+            _bonesRB[i].angularDrag *= active ? _strenghtOfSlowInCutscene : (float)1 / _strenghtOfSlowInCutscene;
+        }
+    }
     private int CircleValue(int value,int max)
     {
         if(value>=max)

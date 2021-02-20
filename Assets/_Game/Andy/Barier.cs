@@ -20,7 +20,7 @@ public class Barier : MonoBehaviour
         GameManager.OnResize -= MadeDestroyable;
     }
     // Update is called once per frame
-    private void MadeDestroyable(int value)
+    private void MadeDestroyable(int value,int oldValue)
     {
         if(value>= _sizeToDestroy)
         {
