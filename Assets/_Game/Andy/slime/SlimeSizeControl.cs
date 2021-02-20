@@ -29,7 +29,7 @@ public class SlimeSizeControl : MonoBehaviour
     {
         _boneControl.ClearJonts();
         //this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
-        this.transform.DOMoveY(this.transform.position.y + _scaleGrowth * value, _anTime).OnStart(()=> {
+        this.transform.DOMoveY(this.transform.position.y + _scaleGrowth * value*2, _anTime).OnStart(()=> {
             this.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime);
             _boneControl.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime).OnComplete(() => {
                 _boneControl.SetJoints();

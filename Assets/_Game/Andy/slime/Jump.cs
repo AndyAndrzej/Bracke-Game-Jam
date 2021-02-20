@@ -15,6 +15,8 @@ public class Jump : MonoBehaviour
     [SerializeField][Range(0,5)] private float _jumpForceGrowthTime = 1;
     [SerializeField] private GameObject _environment;
     [SerializeField] private BoneMapping _boneControl;
+    [HideInInspector] public bool canBeControled = true;
+    [SerializeField] private float _slimeSizeModForVer=1, _slimeSizeModForHor=1;
 
     void Start()
     {
@@ -27,15 +29,18 @@ public class Jump : MonoBehaviour
     [SerializeField] private float _anTime = 0.1f;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (canBeControled)
         {
-            _timePressed = Time.time;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _timePressed = Time.time;
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                JumpNow();
+            }
+            _moveDirection = Input.GetAxis("Horizontal");
         }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            JumpNow();
-        }
-        _moveDirection = Input.GetAxis("Horizontal");
     }
     private Vector3 _jumpHeight;
     private void JumpNow()
@@ -44,11 +49,11 @@ public class Jump : MonoBehaviour
 
            for (int i = 0; i < _bonesRB.Length; i++)
             {
-                _bonesRB[i].AddForce((Vector3.right*_moveDirection)* _directionalForce * _jumpStrenght, ForceMode.Impulse);
+                _bonesRB[i].AddForce((Vector3.right*_moveDirection)* _directionalForce * _jumpStrenght*(_slimeSizeModForHor*GameManager.Instance.SizePoints), ForceMode.Impulse);
 
             }
         Vector3 y= _environment.transform.position;
-        _jumpHeight = (Vector3.up * _force) * _anTime * _jumpStrenght;
+        _jumpHeight = (Vector3.up * _force) * _anTime * _jumpStrenght* (_slimeSizeModForVer * GameManager.Instance.SizePoints);
         _environment.transform.DOMove(_environment.transform.position + _jumpHeight, _anTime)
             .OnComplete(() => {
             _environment.transform.DOMove(y, _anTime);
