@@ -9,11 +9,19 @@ public class GameManager : MonoBehaviour
     public int SizePoints { get => _sizePoints; set { OnResize(value, _sizePoints); _sizePoints = value;} }
     public GameObject Player { get => _player; set => _player = value; }
     public static GameManager Instance { get => _instance; set => _instance = value; }
+    public bool IsSliced { get => _isSliced; set { _isSliced = value; OnSliced(value); } }
+
+    public List<GameObject> ChildrenSlime { get => _childrenSlime; set => _childrenSlime = value; }
+
+    private bool _isSliced;
+    private List<GameObject> _childrenSlime = new List<GameObject>();
 
     public int enemiesDefeated = 0;
     public int level = 0;
     public delegate void Resized(int size,int oldsize);
     public static event Resized OnResize;
+    public delegate void Sliced(bool smaller);
+    public static event Sliced OnSliced;
     private static GameManager _instance = null;
     void Awake()
     {

@@ -13,7 +13,7 @@ public class Jump : MonoBehaviour
     [SerializeField] private float _force = 5,_directionalForce=25;
     [Header("Czas po którym osiąga maks moc skoku")]
     [SerializeField][Range(0,5)] private float _jumpForceGrowthTime = 1;
-    [SerializeField] private GameObject _environment;
+    [SerializeField] public GameObject _environment;
     [SerializeField] private BoneMapping _boneControl;
     [HideInInspector] public bool canBeControled = true;
     [SerializeField] private float _slimeSizeModForVer=1, _slimeSizeModForHor=1;
@@ -27,6 +27,7 @@ public class Jump : MonoBehaviour
     // Update is called once per frame
     private float _jumpStrenght = 0,_timePressed;
     [SerializeField] private float _anTime = 0.1f;
+    private float _restTime=4, _tempTime=0;
     void Update()
     {
         if (canBeControled)
@@ -40,6 +41,11 @@ public class Jump : MonoBehaviour
                 JumpNow();
             }
             _moveDirection = Input.GetAxis("Horizontal");
+            if(Input.GetKeyDown(KeyCode.R)&& Mathf.Abs(_tempTime-Time.time)>_restTime)
+            {
+                _tempTime = Time.time;
+                GameManager.Instance.IsSliced = !GameManager.Instance.IsSliced;
+            }
         }
     }
     private Vector3 _jumpHeight;
