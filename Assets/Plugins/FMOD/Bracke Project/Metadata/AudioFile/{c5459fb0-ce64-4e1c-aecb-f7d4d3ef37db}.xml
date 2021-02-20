@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{c5459fb0-ce64-4e1c-aecb-f7d4d3ef37db}">
+		<property name="assetPath">
+			<value>Slime Connect.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.8591383219954648</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{6db5d680-f5a0-46c1-a18b-be4661085c05}</destination>
+		</relationship>
+	</object>
+</objects>
