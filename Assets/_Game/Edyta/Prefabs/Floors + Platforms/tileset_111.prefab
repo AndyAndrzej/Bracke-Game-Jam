@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2322571614605732852}
   - component: {fileID: 2322571614605732853}
+  - component: {fileID: 5843156162515170871}
   m_Layer: 0
   m_Name: tileset_111
   m_TagString: Floor
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2322571614605732854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.1899999, y: 0.22999999, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,3 +83,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &5843156162515170871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322571614605732854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16, z: 0.2}
+  m_Center: {x: 0.08, y: 0.08, z: 0}
