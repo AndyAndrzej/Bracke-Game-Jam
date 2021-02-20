@@ -19,7 +19,7 @@ public class CutsceneMerge : Cutscene
         _boneControl = _slime.GetComponentInChildren<BoneMapping>();
         _root = _boneControl._rootRB.transform;
         _root.GetComponent<Jump>().canBeControled = false;
-        _boneControl.SlowDown(true);
+        _boneControl.SlowDown();
         _root.DORotate(Vector3.zero, _rotAnTime).OnStart(()=>
            {
                _mergedSlime.DOJump(_mergedSlime.transform.position, _jumpForce,1, _jumpAnTime).OnComplete(()=>
@@ -30,7 +30,6 @@ public class CutsceneMerge : Cutscene
                        {
                            _mergedSlime.gameObject.SetActive(false);
                            GameManager.Instance.SizePoints += (int)_sizePoints;
-                           _boneControl.SlowDown(false);
                            _root.GetComponent<Jump>().canBeControled = true;
                        });
                    });

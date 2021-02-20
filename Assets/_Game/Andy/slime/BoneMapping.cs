@@ -111,13 +111,13 @@ public class BoneMapping : MonoBehaviour
         }
     }
     [SerializeField] private float _strenghtOfSlowInCutscene=250;
-    public void SlowDown(bool active)
+    public void SlowDown()
     {
 
         for (int i = 0; i < _root.transform.childCount; i++)
         {
-            _bonesRB[i].drag *= active? _strenghtOfSlowInCutscene : (float)1/ _strenghtOfSlowInCutscene;
-            _bonesRB[i].angularDrag *= active ? _strenghtOfSlowInCutscene : (float)1 / _strenghtOfSlowInCutscene;
+            _bonesRB[i].angularVelocity = Vector3.zero;
+            _bonesRB[i].velocity = Vector3.zero;
         }
     }
     private int CircleValue(int value,int max)

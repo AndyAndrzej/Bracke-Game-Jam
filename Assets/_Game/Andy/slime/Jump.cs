@@ -49,11 +49,11 @@ public class Jump : MonoBehaviour
 
            for (int i = 0; i < _bonesRB.Length; i++)
             {
-                _bonesRB[i].AddForce((Vector3.right*_moveDirection)* _directionalForce * _jumpStrenght*(_slimeSizeModForHor*GameManager.Instance.SizePoints), ForceMode.Impulse);
+                _bonesRB[i].AddForce((Vector3.right*_moveDirection) * (_directionalForce + (_slimeSizeModForHor * GameManager.Instance.SizePoints)) * _jumpStrenght, ForceMode.Impulse);
 
             }
         Vector3 y= _environment.transform.position;
-        _jumpHeight = (Vector3.up * _force) * _anTime * _jumpStrenght* (_slimeSizeModForVer * GameManager.Instance.SizePoints);
+        _jumpHeight = (Vector3.up * (_force + (_slimeSizeModForVer * GameManager.Instance.SizePoints))) * _anTime * _jumpStrenght;
         _environment.transform.DOMove(_environment.transform.position + _jumpHeight, _anTime)
             .OnComplete(() => {
             _environment.transform.DOMove(y, _anTime);
