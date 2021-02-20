@@ -30,8 +30,8 @@ public class BoneMapping : MonoBehaviour
     private RigidbodyConstraints _constraints;
     private void Awake()
     {
-        _root = _armature.GetChild(0).gameObject;
-        _constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        _root = _armature.gameObject;
+        _constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ| RigidbodyConstraints.FreezeRotationX;
         if (!_root.TryGetComponent(out _rootRB))
         {
             _rootRB = _root.AddComponent<Rigidbody>();
@@ -47,6 +47,7 @@ public class BoneMapping : MonoBehaviour
 
             //add colison and main rigidbody
                 _bonesRB[i] = _bones[i].AddComponent<Rigidbody>();
+                _bonesRB[i].constraints = RigidbodyConstraints.FreezePositionZ;
                 _bonesCol[i]=_bones[i].AddComponent<SphereCollider>();
                 _bonesCol[i].radius = _size;
                 _bonesCol[i].center = _bones[i].transform.InverseTransformPoint(_root.transform.position) * _colCenterPosBetRootAndBone;
@@ -55,9 +56,20 @@ public class BoneMapping : MonoBehaviour
                 _bonesRB[i].mass = i< _root.transform.childCount/2 ? _mass*2:_mass;
                 _bonesRB[i].angularDrag = _rbAngularDrag;
                 _bonesRB[i].drag = _rbDrag;
-     }
-        int j =_root.transform.childCount;
-        for (int k = -_bonesConnections/2; k < _bonesConnections / 2+1; k++)
+        }
+        SetJoints();
+ 
+    }
+    public void SetJoints()
+    {
+        for (int i = 0; i < _root.transform.childCount; i++)
+        {
+            _bonesRB[i].isKinematic = false;
+            _bonesRB[i].useGravity = true;
+        }
+
+            int j = _root.transform.childCount;
+        for (int k = -_bonesConnections / 2; k < _bonesConnections / 2 + 1; k++)
         {
             if (k != 0)
             {
@@ -71,7 +83,8 @@ public class BoneMapping : MonoBehaviour
 
                     j++;
                 }
-            }else
+            }
+            else
             {
                 for (int i = 0; i < _root.transform.childCount; i++)
                 {
@@ -83,33 +96,18 @@ public class BoneMapping : MonoBehaviour
             }
         }
     }
-    public void ResetJoints()
+    public void ClearJonts()
     {
-        int j = _root.transform.childCount;
-        for (int k = -_bonesConnections / 2; k < _bonesConnections / 2 + 1; k++)
+        for (int i = 0; i < _root.transform.childCount; i++)
         {
-            if (k != 0)
-            {
-                for (int i = 0; i < _root.transform.childCount; i++)
-                {
-
-                    _bonesSpring[j].connectedBody = _bonesRB[CircleValue(i + k, _root.transform.childCount)];
-                    _bonesSpring[j].damper = _damper;
-                    _bonesSpring[j].spring = _spring;
-
-                    j++;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < _root.transform.childCount; i++)
-                {
-
-                    _bonesSpring[i].connectedBody = _rootRB;
-                    _bonesSpring[i].damper = _damper;
-                    _bonesSpring[i].spring = _spring;
-                }
-            }
+            _bonesRB[i].angularVelocity = Vector3.zero;
+            _bonesRB[i].velocity = Vector3.zero;
+            _bonesRB[i].isKinematic = true;
+            _bonesRB[i].useGravity = false;
+        }
+        for (int i = _bonesSpring.Length - 1; i >= 0; i--)
+        {
+            Destroy(_bonesSpring[i]);
         }
     }
     private int CircleValue(int value,int max)

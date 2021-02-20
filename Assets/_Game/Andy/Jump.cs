@@ -14,11 +14,12 @@ public class Jump : MonoBehaviour
     [Header("Czas po którym osiąga maks moc skoku")]
     [SerializeField][Range(0,5)] private float _jumpForceGrowthTime = 1;
     [SerializeField] private GameObject _environment;
+    [SerializeField] private BoneMapping _boneControl;
 
     void Start()
     {
-        _rootRB = this.GetComponentInParent<BoneMapping>()._rootRB;
-        _bonesRB= this.GetComponentInParent<BoneMapping>()._bonesRB;
+        _rootRB = _boneControl._rootRB;
+        _bonesRB= _boneControl._bonesRB;
     }
     private float _moveDirection;
     // Update is called once per frame

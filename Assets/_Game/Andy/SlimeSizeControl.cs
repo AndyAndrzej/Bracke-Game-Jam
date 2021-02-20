@@ -9,11 +9,13 @@ public class SlimeSizeControl : MonoBehaviour
     private float _startZPos;
     [SerializeField] private float _scaleGrowth;
     [SerializeField] private float _anTime = 2;
+    [SerializeField] private BoneMapping _boneControl;
     private Vector3 _pos;
     private void Awake()
     {
-        _startZPos = this.transform.parent.position.z;
-        
+        _startZPos = _boneControl.transform.localScale.z;
+
+
     }
     private void OnEnable()
     {
@@ -25,8 +27,12 @@ public class SlimeSizeControl : MonoBehaviour
     }
     public void ChangeSize(int value)
     {
-        
-        this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
+        _boneControl.ClearJonts();
+        //this.transform.parent.DOMoveZ(_startZPos - _scaleGrowth * value, _anTime);
+        this.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime);
+        _boneControl.transform.DOScale(_startZPos + _scaleGrowth * value, _anTime).OnComplete(()=> {
+            _boneControl.SetJoints();
+        });
 
     }
 }
