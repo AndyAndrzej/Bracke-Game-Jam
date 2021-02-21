@@ -10,4 +10,13 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(name);
             }
+    public void LoadStart()
+    {
+        SceneManager.LoadScene("FinalGameScene");
+    }
+
+    public void Start()
+    {
+        Invoke("LoadStart", 3f);
+    }
 }
