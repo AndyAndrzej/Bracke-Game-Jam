@@ -39,12 +39,14 @@ public class Jump : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 JumpNow();
+                this.GetComponent<FMODPlayerEvents>().PlayJumpEvent();
             }
             _moveDirection = Input.GetAxis("Horizontal");
             if(Input.GetKeyDown(KeyCode.R)&& Mathf.Abs(_tempTime-Time.time)>_restTime)
             {
                 _tempTime = Time.time;
                 GameManager.Instance.IsSliced = !GameManager.Instance.IsSliced;
+                this.GetComponent<FMODPlayerEvents>().PlayConnectEvent();
             }
         }
     }

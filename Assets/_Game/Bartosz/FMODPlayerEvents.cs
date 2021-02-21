@@ -22,12 +22,12 @@ public class FMODPlayerEvents : MonoBehaviour
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(JumpEvent, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
 
-    void PlayJumpEvent()
+    public void PlayJumpEvent()
     {
         JumpEvent.start();
     }
 
-    void PlayConnectEvent()
+    public void PlayConnectEvent()
     {
         ConnectEvent.start();
     }
