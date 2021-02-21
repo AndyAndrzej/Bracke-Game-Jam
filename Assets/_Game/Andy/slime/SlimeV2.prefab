@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043038744335566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039199020524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,8 @@ GameObject:
   - component: {fileID: 3667043039240640940}
   - component: {fileID: 3667043039240640941}
   - component: {fileID: 3667043039240640942}
-  m_Layer: 0
+  - component: {fileID: 704462888}
+  m_Layer: 9
   m_Name: slime 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +173,7 @@ MonoBehaviour:
   - {fileID: 3667043039939899020}
   m_Bounds:
     m_Center: {x: 0.0923605, y: -0.2396748, z: 0}
-    m_Extent: {x: 3.51764, y: 3.1176655, z: 0}
+    m_Extent: {x: 3.5176406, y: 3.1176658, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &3667043039240640942
@@ -199,6 +200,24 @@ MonoBehaviour:
   _bonesConnections: 7
   _rootRB: {fileID: 0}
   _bonesRB: []
+  _strenghtOfSlowInCutscene: 250
+--- !u!114 &704462888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667043039240640936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2b51864d41de044b49a3ea23230556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childSlime: {fileID: 2971843408422464620, guid: d04ec8f1c93eef847b5a9aa2177ee13a,
+    type: 3}
+  _sizeControl: {fileID: 3667043039743352660}
+  _navMeshPlane: {fileID: 0}
+  _movTime: 1
 --- !u!1 &3667043039435238027
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039435238026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039644854014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039668384270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +321,7 @@ GameObject:
   - component: {fileID: 3667043039743352660}
   - component: {fileID: 3667043039743352661}
   - component: {fileID: 3667043039743352662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,9 +379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c16c8edaf9850d49abf79565dc2a3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleGrowth: 1
+  _scaleGrowth: 3
   _anTime: 0.1
   _boneControl: {fileID: 3667043039240640942}
+  childSlime: {fileID: 0}
 --- !u!114 &3667043039743352661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +412,9 @@ MonoBehaviour:
   _jumpForceGrowthTime: 2.49
   _environment: {fileID: 0}
   _boneControl: {fileID: 3667043039240640942}
+  canBeControled: 1
+  _slimeSizeModForVer: 5
+  _slimeSizeModForHor: 0.5
   _anTime: 0.1
 --- !u!1 &3667043039921589539
 GameObject:
@@ -402,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039921589538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043039939899020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040190766375}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040278870779}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040406179859}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040408461535}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,9 +589,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3667043040408461528}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.3, y: 53.5, z: 90}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3667043039743352663}
   - {fileID: 3667043039240640943}
@@ -584,7 +607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040530897558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3667043040601543161}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
