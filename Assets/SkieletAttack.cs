@@ -19,20 +19,23 @@ public class SkieletAttack : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.TryGetComponent<InteractWitchOthers>(out _) && _currentSlimeSize>= _ignoreBelow)
+        Debug.Log(collision.transform.gameObject.name);
+       
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.TryGetComponent<InteractWitchOthers>(out _) && _currentSlimeSize >= _ignoreBelow)
         {
-            if(_currentSlimeSize<= _instaKill)
+            if (_currentSlimeSize <= _instaKill)
             {
                 GameManager.Instance.End = GameManager.EndGame.Lose;
-            }else if(_currentSlimeSize >= _alwaysKill)
+            }
+            else if (_currentSlimeSize >= _alwaysKill)
             {
                 GameManager.Instance.enemiesDefeated++;
                 Destroy(this.gameObject);
             }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
         if (other.transform.TryGetComponent<InteractWitchOthers>(out _) && _currentSlimeSize >= _killFromAboveFrom)
         {
             if (other.TryGetComponent<Rigidbody>(out Rigidbody _rb) && _rb.velocity.y<=0)

@@ -12,7 +12,7 @@ public class CutSceneEnd : Cutscene
     // Start is called before the first frame update
     void Start()
     {
-        _readyToPlay = true;
+        ReadyToPlay = true;
     }
 
     // Update is called once per frame

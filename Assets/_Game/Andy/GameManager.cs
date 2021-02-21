@@ -5,12 +5,13 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [System.Serializable]
     public enum EndGame
     {
        proceed,win,Lose
     }
-    private EndGame _end = EndGame.proceed;
-    private int _sizePoints = 0;
+    [SerializeField] private EndGame _end = EndGame.proceed;
+    [SerializeField] private int _sizePoints = 0;
     [SerializeField] private GameObject canvas;
     [SerializeField] private float _maxEnemies, _maxEarned;
     private GameObject _player;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     public bool IsSliced { get => _isSliced; set { _isSliced = value; OnSliced(value); } }
 
     public List<GameObject> ChildrenSlime { get => _childrenSlime; set => _childrenSlime = value; }
-    public EndGame End { get => _end; set { _end = value; } }
+    public EndGame End { get => _end; set { _end = value; EndOfGame(); } }
 
     private bool _isSliced;
     private List<GameObject> _childrenSlime = new List<GameObject>();
@@ -42,7 +43,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
 
     }
     public void AddPlayer(GameObject source)

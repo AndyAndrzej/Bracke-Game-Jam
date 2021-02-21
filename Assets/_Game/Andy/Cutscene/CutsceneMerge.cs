@@ -11,7 +11,7 @@ public class CutsceneMerge : Cutscene
     [SerializeField] private Transform _mergedSlime;
     private void Start()
     {
-        _readyToPlay = true;
+        ReadyToPlay = true;
     }
     public override void Run(Vector3 _position, GameObject _slime)
     {

@@ -6,7 +6,7 @@ public class Barier2 : MonoBehaviour
 {
     [SerializeField] private float  _sizeToDestroy = 1;
     private Animator _anim;
-    private bool _sizeReached = false;
+    [SerializeField] private bool _sizeReached = false;
     void Start()
     {
         _anim = this.GetComponent<Animator>();
@@ -24,9 +24,10 @@ public class Barier2 : MonoBehaviour
     {
         _sizeReached = value >= _sizeToDestroy ? true : false;
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.TryGetComponent<InteractWitchOthers>(out _) && _sizeReached && !GameManager.Instance.IsSliced)
+        if (other.transform.TryGetComponent<InteractWitchOthers>(out _) && _sizeReached && !GameManager.Instance.IsSliced)
         {
             _anim.SetTrigger("Run");
             Destroy(this.gameObject, 2);
